@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore the best travel destinations and packages with our travel agency">
+    <title>Voyage Vista Travel Agency</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-color: #d3d3d3;
+            color: #ffffff;
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin: 10px 0;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 40px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            width: 250px;
+            position: relative;
+            margin: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: rotate(-3deg);
+        }
+
+        .card:nth-child(2) {
+            transform: rotate(0deg);
+            z-index: 2;
+        }
+
+        .card:nth-child(3) {
+            transform: rotate(3deg);
+        }
+
+        .card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            color: #000000;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .card p {
+            color: #000000;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .quick-links {
+            margin-top: 40px;
+        }
+
+        .quick-links-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .quick-link-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .quick-link-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .quick-link-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .quick-button {
+            background-color: #000000;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .back-to-home {
+            display: block;
+            margin: 30px auto;
+            padding: 10px 20px;
+            text-align: center;
+            background-color: #000000;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .back-to-home:hover {
+           
+           background-color: #1f1e1e;
+        }
+
+       
+
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        footer p {
+            color: #000000; /* Changed copyright text color to black */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: courier new, sans-serif;
+        }
+
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #01304e;
+            border-bottom: 1px solid #ddd;
+            width: 100%;
+        }
+        
+        .testimonials {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .testimonials-header h1 {
+            font-size: 2.5rem;
+            color: #000000;
+            margin-bottom: 0.5rem;
+        }
+
+        .testimonials-header p {
+            font-size: 1.1rem;
+            color: #000000;
+        }
+
+        .testimonial {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            background: #fff;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .testimonial:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .testimonial-image {
+            flex: 0 0 300px;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 4px;
+        }
+
+        .testimonial-content {
+            flex: 1;
+            padding: 1rem;
+        }
+
+        .testimonial-content h2 {
+            color: #000000;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .testimonial-content p {
+            color: #000000;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .testimonial {
+                flex-direction: column !important;
+            }
+            
+            .testimonial-image {
+                width: 100%;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Explore Our Services</h1>
+    </header>
+
+    <main>
+        <div class="cards-container">
+            <div class="card">
+                <img src="images/hotels.png" alt="Luxury hotel packages">
+                <h3>Hotels</h3>
+                <p>Stay in world-class hotels that offer unparalleled luxury, comfort, and top-notch services, making your travel truly unforgettable.</p>
+            </div>
+            <div class="card">
+                <img src="images/cruises.png" alt="Luxury cruise trips">
+                <h3>Cruise Trips</h3>
+                <p>Embark on an unforgettable journey across serene oceans and exotic destinations, all while enjoying the finest onboard amenities.</p>
+            </div>
+            <div class="card">
+                <img src="images/customtravel.png" alt="Guided custom travel adventures">
+                <h3>Custom Travel</h3>
+                <p>Tailor your dream vacation with personalized itineraries that cater to your preferences and let you explore destinations at your own pace.</p>
+            </div>
+        </div>
+
+        
+
+        
+    </main>
+    <section class="testimonials">
+        <div class="testimonials-header">
+            <h1>What Our Clients Say</h1>
+            <p>Hear from those who traveled with us</p>
+        </div>
+
+        <div class="testimonial">
+            <div class="testimonial-image" style="background-image: url('https://images.unsplash.com/photo-1504150558240-0b4fd8946624?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+            <div class="testimonial-content">
+                <h2>Exceptional Service</h2>
+                <p>"The team provided outstanding service from start to finish. They listened to our needs and created an itinerary that exceeded our expectations."- Zade Maedow</p>
+            </div>
+        </div>
+
+        <div class="testimonial">
+            <div class="testimonial-image" style="background-image: url('https://images.unsplash.com/photo-1503220317375-aaad61436b1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+            <div class="testimonial-content">
+                <h2>Stress-Free Travel</h2>
+                <p>"I was amazed at how stress-free my trip was. The booking process was seamless, and I felt supported throughout the entire journey."- </p>
+            </div>
+        </div>
+
+        <div class="testimonial">
+            <div class="testimonial-image" style="background-image: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+            <div class="testimonial-content">
+                <h2>Unforgettable Adventures</h2>
+                <p>"Our hiking tour through the mountains was absolutely breathtaking. The guides were knowledgeable and the views were incredible. Best vacation ever!"</p>
+            </div>
+        </div>
+
+        <div class="testimonial">
+            <div class="testimonial-image" style="background-image: url('https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+            <div class="testimonial-content">
+                <h2>Perfect Family Holiday</h2>
+                <p>"They planned activities that everyone in our family enjoyed, from our 5-year-old to our teenagers. The accommodations were perfect and the schedule was well-balanced."</p>
+            </div>
+        </div>
+
+     
+    <footer>
+        <section style="text-align: center;">
+            <a href="HomePage.html" class="back-to-home">Back to Homepage</a>
+        </section>
+        <p>&copy; 2024 Voyage Vista Travel Agency. All rights reserved.</p>
+    </footer>
+</body>
+</html>

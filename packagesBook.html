@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Trip</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #01304e;
+        }
+
+        .container {
+            display: flex; /* Enables flexbox to align items side-by-side */
+            flex-wrap: wrap; /* Allows items to wrap if the screen is too narrow */ 
+            max-width: 1100px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .form-section, .image-section {
+            flex: 1;/* Takes up equal space as the image section */
+            padding: 20px;
+        }
+        
+        /* Ensures the image scales proportionally without distortion */
+        .image-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0 10px 10px 0;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 10px;
+            font-family: 'Courier New', Courier, monospace, sans-serif;
+            color: #000000;
+        }
+        h2 {
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace, sans-serif;
+            margin-bottom: 7px;
+            color: #333;
+
+        }
+
+
+        label {
+            font-size: 1rem;
+            margin: 10px 0;
+            display: block; /* Ensures labels stack vertically */
+        }
+
+        input, select, textarea {
+            padding: 10px;/* Comfortable padding for input */
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px; /* Rounded corners for a modern look */
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        /* Button styling */
+        button {
+            padding: 10px 20px;  /* Spacious button for easier clicking */
+            background-color: #000000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer; /* Changes cursor to pointer on hover */
+            width: 100%;
+            font-size: 1.2rem;
+        }
+
+        button:hover {
+            background-color: #333;
+        }
+
+        .price-display {
+            margin-top: 20px;
+            font-size: 1.5rem; /* Larger text size for emphasis */
+            font-weight: bold;
+            color: #01304e;
+        }
+
+        .back-to-home {
+            display: block;
+            margin: 30px auto;
+            text-align: center;
+            padding: 10px 20px;
+            background-color: #000000;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .back-to-home:hover {
+            background-color: #1f1e1e;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 14px;
+            color: #ffffff;
+            margin-top: 40px;
+            background-color: #00243b;
+            color: white;
+        }
+
+        footer p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>✈️Book Your Trip With Voyage Vista✈️</h1>
+    </header>
+    <div class="container">
+        <!-- Form Section -->
+        <div class="form-section">
+           
+            
+            <h2>An amazing trip is waiting for you and your friends. You are just one step away from having a fabulous adventure.</h2>
+            <br>
+            <form>
+                <label for="package">Choose a Package:</label>
+                <select id="package" name="package">
+                    <option value="85000">Explore Bali - MUR 85 000</option>
+                    <option value="45000">Disneyland Paris - MUR 45 000</option>
+                    <option value="65000">Discover Incredible India - MUR 65 000</option>
+                    <option value="35000">Relax in Rodrigues - MUR 35 000</option>
+                    <option value="110000">Winter Wonderland in Norway - MUR 110 000</option>
+                </select>
+
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+
+                <label for="number">Phone Number:</label>
+                <input type="number" id="number" name="number" placeholder="Enter your phone number" required>
+
+                <label for="id">ID:</label>
+                <input type="text" id="id" name="id" placeholder="Enter your ID" required>
+
+                <label for="numPeople">Number of People:</label>
+                <input type="number" id="numPeople" name="numPeople" value="1" min="1">
+
+                <label for="extraService">Add Extra Service (Optional):</label>
+                <select id="extraService" name="extraService">
+                    <option value="0">None</option>
+                    <option value="5000">Private Guided Tour - MUR 5000</option>
+                    <option value="10000">Luxury Spa Package - MUR 10000</option>
+                    <option value="2000">Premium Airport Transfer - MUR 2000</option>
+                </select>
+
+                <div class="price-display">
+                    Total Price: MUR <span id="totalPrice">85000</span>
+                </div>
+
+                <button type="submit">Confirm Booking</button>
+            </form>
+        </div>
+
+        <!-- Image Section -->
+        <div class="image-section">
+            <img src="images/travelimage.png" alt="Travel Image">
+        </div>
+    </div>
+
+    <footer>
+        <a href="HomePage.html" class="back-to-home">Back to Homepage</a>
+        <p>&copy; 2024 Voyage Vista Travel Agency</p>
+    </footer>
+</body>
+</html>

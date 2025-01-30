@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Quiz</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .background-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .quiz-wrapper {
+            height: 100vh;
+           
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding:60px 20px;
+        }
+
+        .welcome-info {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            margin-bottom: 40px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .welcome-info h2 {
+            font-family: 'Courier New', Courier, monospace, sans-serif;
+            color: #000000;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+        }
+        .quiz-container {
+            width: 70%;
+            max-width: 300px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .question {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .options label:hover {
+            background-color: #e9ecef;
+            border-color: #000000;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 8px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        button {
+            padding: 6px 12px;
+            background-color: #000000;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        footer {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+        .back-to-home-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #000000;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            color: white;
+            margin: 5px 0;
+        }
+
+        @media screen and (max-width: 480px) {
+            .quiz-container {
+                width: 95%;
+                padding: 15px;
+                margin: 10px auto;
+            }
+
+            .options label {
+                padding: 8px 12px;
+            }
+
+            button {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <video autoplay muted loop playsinline class="background-video">
+            <source src="C:\Users\Ritika\Videos\Captures\backgroundvideo.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="quiz-wrapper">
+        <div class="welcome-info">
+            <h2>Welcome to the Voyage Vista Travel Challenge!</h2>
+            <p>Get ready for 10 randomly selected questions about destinations, geography, and travel facts. Test your global knowledge!</p>
+        </div>
+
+        <div class="quiz-container">
+            <div id="quiz-content">
+                <div class="question"></div>
+                <div class="options"></div>
+            </div>
+
+            <div class="buttons">
+                <button id="prev-btn" disabled>Previous</button>
+                <button id="next-btn">Next</button>
+            </div>
+
+            <div id="submit-btn" style="display: none; text-align: center; margin-top: 15px;">
+                <button>Submit Quiz</button>
+            </div>
+
+            <div id="score" class="score"></div>
+        </div>
+    </div>
+
+    <footer>
+        <a href="HomePage.html" class="back-to-home-btn">Back to Homepage</a>
+        <p>&copy; 2024 Voyage Vista Travel Agency</p>
+    </footer>
+
+    <script>
+        $(document).ready(function() {
+        const questionsPool = [
+            { question: "What is the capital of France?", options: ["Paris", "London", "Berlin", "Rome"], answer: "Paris" },
+            { question: "Which country is famous for sushi?", options: ["China", "Japan", "Korea", "India"], answer: "Japan" },
+            { question: "Where is the Great Barrier Reef?", options: ["Australia", "USA", "South Africa", "Canada"], answer: "Australia" },
+            { question: "Which country is known as the Land of the Rising Sun?", options: ["Japan", "China", "Thailand", "Vietnam"], answer: "Japan" },
+            { question: "What is the tallest mountain in the world?", options: ["Mount Everest", "K2", "Mount Kilimanjaro", "Denali"], answer: "Mount Everest" },
+            { question: "Which city is known as the Big Apple?", options: ["New York", "London", "Los Angeles", "Chicago"], answer: "New York" },
+            { question: "What is the longest river in the world?", options: ["Nile", "Amazon", "Yangtze", "Mississippi"], answer: "Amazon" },
+            { question: "Which continent has the most countries?", options: ["Africa", "Asia", "Europe", "South America"], answer: "Africa" },
+            { question: "What is the currency of Japan?", options: ["Yen", "Dollar", "Won", "Euro"], answer: "Yen" },
+            { question: "Which ocean is the largest?", options: ["Pacific", "Atlantic", "Indian", "Arctic"], answer: "Pacific" },
+
+            { question: "Which country is home to the famous Angkor Wat temple?", options: ["Cambodia", "Thailand", "Vietnam", "Laos"], answer: "Cambodia" },
+            { question: "Which city is known as the 'City of Canals'?", options: ["Venice", "Amsterdam", "Bruges", "Bangkok"], answer: "Venice" },
+            { question: "What is the main airport in Dubai called?", options: ["Dubai International Airport", "Al Maktoum Airport", "Sharjah Airport", "Abu Dhabi Airport"], answer: "Dubai International Airport" },
+            { question: "In which country can you visit the ancient city of Petra?", options: ["Jordan", "Israel", "Egypt", "Syria"], answer: "Jordan" },
+            { question: "Which country is famous for its tulips and windmills?", options: ["Netherlands", "Belgium", "Denmark", "Germany"], answer: "Netherlands" },
+            { question: "What is the name of the highest waterfall in the world?", options: ["Angel Falls", "Niagara Falls", "Victoria Falls", "Iguazu Falls"], answer: "Angel Falls" },
+            { question: "Which desert covers much of northern Africa?", options: ["Sahara Desert", "Gobi Desert", "Kalahari Desert", "Atacama Desert"], answer: "Sahara Desert" },
+            { question: "Which country is known for the historic Machu Picchu ruins?", options: ["Peru", "Mexico", "Chile", "Argentina"], answer: "Peru" },
+            { question: "What is the official language of Brazil?", options: ["Portuguese", "Spanish", "French", "English"], answer: "Portuguese" },
+            { question: "Which island is known for the Moai statues?", options: ["Easter Island", "Bali", "Fiji", "Galapagos Islands"], answer: "Easter Island" },
+
+            { question: "Which country is known for the unique rock formations of Cappadocia?", options: ["Turkey", "Greece", "Jordan", "Iran"], answer: "Turkey" },
+            { question: "What is the official currency of South Africa?", options: ["Rand", "Dollar", "Shilling", "Pound"], answer: "Rand" },
+            { question: "Which country is famous for its kangaroos and koalas?", options: ["Australia", "New Zealand", "South Africa", "Canada"], answer: "Australia" },
+            { question: "Which European city is known for its historical Colosseum?", options: ["Rome", "Athens", "Madrid", "Paris"], answer: "Rome" },
+            { question: "What is the name of the large clock tower in London?", options: ["Big Ben", "Tower Bridge", "London Eye", "The Shard"], answer: "Big Ben" },
+            { question: "Which country has a city called Casablanca?", options: ["Morocco", "Egypt", "Algeria", "Tunisia"], answer: "Morocco" },
+            { question: "In which country would you find Mount Kilimanjaro?", options: ["Tanzania", "Kenya", "Ethiopia", "Uganda"], answer: "Tanzania" },
+            { question: "Which Asian country is known for its cherry blossoms?", options: ["Japan", "South Korea", "China", "Thailand"], answer: "Japan" },
+            { question: "Which country is home to the famous Table Mountain?", options: ["South Africa", "Namibia", "Botswana", "Zimbabwe"], answer: "South Africa" },
+            { question: "Which country is home to the Great Wall?", options: ["China", "India", "Japan", "Russia"], answer: "China" },
+            { question: "Which city is famous for its Eiffel Tower?", options: ["Paris", "London", "Berlin", "Rome"], answer: "Paris" },
+
+            { question: "Which country is known for the historic Machu Picchu ruins?", options: ["Peru", "Mexico", "Chile", "Argentina"], answer: "Peru" },
+            { question: "Which country is home to the ancient city of Petra?", options: ["Jordan", "Israel", "Egypt", "Syria"], answer: "Jordan" },
+            { question: "Which desert is the largest in the world?", options: ["Sahara Desert", "Gobi Desert", "Atacama Desert", "Kalahari Desert"], answer: "Sahara Desert" },
+            { question: "Which city is known as the 'City of Love'?", options: ["Paris", "Venice", "Rome", "Barcelona"], answer: "Paris" },
+            { question: "Which island is famous for its Moai statues?", options: ["Easter Island", "Bali", "Fiji", "Galapagos Islands"], answer: "Easter Island" },
+            { question: "Which country is known for its kangaroos and koalas?", options: ["Australia", "New Zealand", "South Africa", "Canada"], answer: "Australia" },
+            { question: "Which city is known for its historical Colosseum?", options: ["Rome", "Athens", "Madrid", "Paris"], answer: "Rome" },
+            { question: "Which continent is known as the 'Frozen Continent'?", options: ["Antarctica", "Arctic", "Africa", "Australia"], answer: "Antarctica" }
+
+        ];
+
+        // Randomly select 10 questions
+        const selectedQuestions = [];
+        while (selectedQuestions.length < 10) {
+            const randomIndex = Math.floor(Math.random() * questionsPool.length);
+            if (!selectedQuestions.includes(questionsPool[randomIndex])) {
+                selectedQuestions.push(questionsPool[randomIndex]);
+            }
+        }
+// Track the current question index (starts at the first question)
+        let currentQuestionIndex = 0;
+       // Create an array to store the user's answers, initialized with null value
+        const answers = new Array(10).fill(null);
+// Cache DOM elements for easier access and improved performance
+        const $questionElement = $(".question");
+        const $optionsElement = $(".options");
+        const $prevBtn = $("#prev-btn");
+        const $nextBtn = $("#next-btn");
+        const $submitBtnContainer = $("#submit-btn");
+        const $scoreElement = $("#score");
+
+        function displayQuestion(index) {
+            const questionData = selectedQuestions[index];
+            $questionElement.text(`${index + 1}. ${questionData.question}`);
+            $optionsElement.empty();
+
+             // Loop through the options and create radio buttons for each
+            questionData.options.forEach(option => {
+                 // Create a label element for the option
+                const $optionLabel = $("<label>");
+                      // Create a radio input element with the option value
+                const $optionInput = $("<input>").attr({
+                    type: "radio",
+                    name: `question-${index}`,
+                    value: option,
+                    checked: answers[index] === option
+                });
+ // Append the input and option text to the label, then add to the DOM
+                $optionLabel.append($optionInput).append(option);
+                $optionsElement.append($optionLabel);
+            });
+ // Enable or disable the Previous button based on the question index
+            $prevBtn.prop("disabled", index === 0);
+            $nextBtn.toggle(index !== selectedQuestions.length - 1);
+            $submitBtnContainer.toggle(index === selectedQuestions.length - 1);
+        }
+//Function to handle the "Next" button click event.
+ 
+        function handleNext() {
+            saveAnswer();
+            // Move to the next question if not already at the last one
+            if (currentQuestionIndex < selectedQuestions.length - 1) {
+                currentQuestionIndex++;
+                displayQuestion(currentQuestionIndex);
+            }
+        }
+
+//Function to handle the "Previous" button click event.
+ 
+        function handlePrev() {
+            saveAnswer();
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion(currentQuestionIndex);
+            }
+        }
+//Function to save the user's selected answer for the current question.
+
+        function saveAnswer() {
+            const selectedOption = $(`input[name='question-${currentQuestionIndex}']:checked`);
+             // If a radio button is selected, save its value to the answers array
+            if (selectedOption.length) {
+                answers[currentQuestionIndex] = selectedOption.val();
+            }
+        }
+// Function to calculate and display the user's quiz score.
+ 
+        function calculateScore() {
+            // Check if all questions are answered; alert if any are missing
+            if (answers.includes(null)) {
+                alert("Please answer all questions before submitting.");
+                return;
+            }
+            let score = 0;
+            answers.forEach((answer, index) => {
+                if (answer === selectedQuestions[index].answer) {
+                    score++;
+                }
+            });
+
+    // Display the user's score
+            $scoreElement.text(`You scored ${score} out of ${selectedQuestions.length}!`);
+        }
+
+        // Event listeners using jQuery
+        $nextBtn.on("click", handleNext);
+        $prevBtn.on("click", handlePrev);
+        $submitBtnContainer.find("button").on("click", calculateScore);
+
+        // Display the first question
+        displayQuestion(currentQuestionIndex);
+    });
+    </script>
+</body>
+</html>

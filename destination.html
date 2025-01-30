@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace, sans-serif;
+            background-color: #01304e;
+            display: flex;
+            flex-direction: column; /* Arrange the content vertically */
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Header Styling */
+        header {
+            width: 100%;
+            background-color: #01304e;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 100px; /* Adjust the logo size */
+            height: auto;
+        }
+
+        /* Slider Container */
+        .slider {
+            width: 80%;
+            max-width: 1000px;
+            overflow: hidden;
+            position: relative;
+            margin-top: 20px; /* Add space between the logo and slider */
+        }
+
+        /* Card Container */
+        .card-container {
+            display: flex;
+            gap: 20px;
+            animation: slide-animation 12s infinite linear;
+          
+            
+        }
+
+        .card-container:hover {
+            animation-play-state: paused;
+        }
+
+        .card {
+            width: 350px;
+            height: 350px;
+            perspective: 1000px;
+            flex-shrink: 0;
+        }
+
+        /* Card Flip Animation */
+        .card:hover .card-front {
+            transform: rotateY(180deg);
+        }
+        .card:hover .card-back {
+            transform: rotateY(0);
+        }
+
+        /* Front and Back Styling */
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .card-front {
+            background-color: #ffffff;
+            color: black;
+            transform: rotateY(0);
+            transition: transform 0.8s;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            height: 100%;
+        }
+
+        .card-front h2 {
+            margin: 10px 0;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .card-front img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .card-back {
+            background-color: #000000;
+            color: white;
+            transform: rotateY(180deg);
+            transition: transform 0.8s;
+        }
+
+        /* Sliding Animation */
+
+        @keyframes slide-animation {
+    0% { transform: translateX(200px); }  /* Leave a small part of the first card visible */
+    20% { transform: translateX(-350px); } /* Shift by card width */
+    40% { transform: translateX(-700px); }
+    60% { transform: translateX(-1050px); }
+    80% { transform: translateX(-1400px); }
+    100% { transform: translateX(20px); } /* Reset back to showing part of the first card */
+}
+
+
+        /* Footer Styling */
+        .back-to-home {
+           display: block;
+           margin: 7px auto;
+           text-align: center;
+           padding: 7px 7px;
+           background-color: #000000;
+           color: white;
+           text-decoration: none;
+           border-radius: 4px;
+        }
+
+        .back-to-home:hover {
+           background-color: #1f1e1e;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 14px;
+            color: #ffffff;
+            margin-top: 40px;
+        
+            
+        }
+        
+
+        footer p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/logo.png"  alt="Voyage Vista Travel Agency Logo">
+        </div>
+    </header>
+
+    <div class="slider">
+        <div class="card-container">
+            <!-- Card 1 -->
+            <div class="card">
+                <div class="card-front">
+                    <h2>Paris</h2>
+                    <img src="images/paris.png" alt="Paris">
+                </div>
+                <div class="card-back">
+                    <p>Paris is the capital city of France, known for its art, fashion, and culture. It is home to world-renowned landmarks such as the Eiffel Tower, the Louvre Museum, and the Notre-Dame Cathedral. The city also boasts a vibrant street life, exquisite cafes, and charming boutiques. Paris is a perfect destination for art lovers, history buffs, and anyone who enjoys the finer things in life.</p>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="card">
+                <div class="card-front">
+                    <h2>Tokyo</h2>
+                    <img src="images/tokyo.png" alt="Tokyo">
+                </div>
+                <div class="card-back">
+                    <p>Tokyo is the bustling capital of Japan, a hub of innovation, technology, and tradition. Famous for its skyscrapers, temples, and futuristic districts like Shibuya, it blends the old with the new. Visitors can explore ancient shrines, shop in cutting-edge malls, or enjoy authentic Japanese cuisine. Tokyo is an exciting destination for both tech enthusiasts and cultural explorers.</p>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="card">
+                <div class="card-front">
+                    <h2>New York</h2>
+                    <img src="images/New york.png" alt="New York">
+                </div>
+                <div class="card-back">
+                    <p>New York City is a global hub for commerce, culture, and finance. Famous for landmarks like Times Square, the Statue of Liberty, and Central Park, it's a vibrant and dynamic city that offers endless things to see and do. From Broadway shows to world-class museums, NYC is a must-visit destination.</p>
+                </div>
+                
+
+            </div>
+            <!-- Card 4 -->
+            <div class="card">
+                <div class="card-front">
+                    <h2>Italy</h2>
+                    <img src="images/italy.png" alt="Italy">
+                </div>
+                <div class="card-back">
+                    <p>Italy is renowned for its rich cultural heritage, breathtaking landscapes, and delicious cuisine. From the canals of Venice to the ruins of Rome, it offers a diverse range of experiences. Italy is also famous for its art, architecture, and fashion, making it a top destination for travelers worldwide.</p>
+                </div>
+            </div>
+            <!-- Card 5 -->
+            <div class="card">
+                <div class="card-front">
+                    <h2>Hawaii</h2>
+                    <img src="images/hawaii.png" alt="Hawaii">
+                </div>
+                <div class="card-back">
+                    <p>Hawaii, a group of islands in the Pacific Ocean, is known for its stunning beaches, lush landscapes, and vibrant culture. It offers a variety of experiences, from surfing and volcano tours to experiencing traditional Hawaiian luaus. It's a paradise for nature lovers and those seeking adventure.</p>
+                </div>
+            </div>
+            <!-- Card 6 -->
+            <div class="card">
+                <div class="card-front">
+                    <h2>Las Vegas</h2>
+                    <img src="images/Las Vegas.png"alt="Las Vegas">
+                </div>
+                <div class="card-back">
+                    <p>Las Vegas, known as "The Entertainment Capital of the World," is famous for its vibrant nightlife, casinos, and luxury resorts. Visitors can enjoy world-class shows, fine dining, and 24-hour entertainment. The Las Vegas Strip offers iconic landmarks like the Bellagio Fountains and the Eiffel Tower replica.</p>
+                </div>
+            </div>
+        </div> <!-- Closing card-container -->
+    </div> <!-- Closing slider -->
+
+    <footer>
+        <section id="destination">
+            <a href="HomePage.html" class="back-to-home">Back to Homepage</a>
+        </section>
+        <p>&copy; 2024 Voyage Vista Travel Agency</p>
+    </footer>
+</body>
+</html>
