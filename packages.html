@@ -1,0 +1,345 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Packages</title>
+    <style>
+       
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace, sans-serif;
+            background: #01304e;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Container for travel packages */
+        .packages-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+            gap: 2rem; /* Space between cards */
+        }
+
+
+        /* Individual package card styling */
+        .package-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Hover effect on package card */
+        .package-card:hover {
+            transform: translateY(-5px); /* Slight upward movement */
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Header section with image */
+        .package-header {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .package-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        /* Image zoom effect on hover */
+        .package-card:hover .package-image {
+            transform: scale(1.05); /* Slight zoom */
+        }
+
+
+        .package-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0)); /* Gradient fade */
+            color: white;
+        }
+
+        .package-title h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-tag {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255,255,255,0.9);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            color: #01304e;
+        }
+
+        .package-content {
+            padding: 1.5rem;
+        }
+
+        .package-description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .inclusions {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .inclusions h3 {
+            color: #01304e;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .inclusions ul {
+            list-style: none;
+            font-size: 0.9rem;
+        }
+
+        .inclusions li {
+            padding: 0.25rem 0;
+            position: relative;
+            padding-left: 1.2rem;
+            color: #555;
+        }
+
+        .inclusions li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #01304e;
+        }
+
+        .book-now {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            background: #01304e;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .book-now:hover {
+            background: #024777;
+        }
+
+        .section-title {
+            text-align: center;
+            color: white;
+            padding: 2rem 0;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+        }
+
+        footer {
+            background: #002339;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .back-to-home {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            color: white;
+            text-decoration: none;
+            border: 1px solid white;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-home:hover {
+            background: rgb(255, 255, 255);
+            color: #000000;
+        }
+
+        /* Responsive adjustments for mobile screens */
+        @media (max-width: 768px) {
+            .packages-container {
+                grid-template-columns: 1fr; /* Stacks cards on smaller screens */
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="section-title">Discover Our Travel Packages</h1>
+    
+    <div class="packages-container">
+        
+        <div class="package-card">
+            <div class="package-header">
+                <img src="images/Bali.jpg" alt="Bali" class="package-image">
+                <div class="price-tag">MUR 85,000</div>
+                <div class="package-title">
+                    <h2>Explore Bali</h2>
+                </div>
+            </div>
+            <div class="package-content">
+                <p class="package-description">Discover the serene beaches, lush greenery, and vibrant culture of Bali.</p>
+                <div class="inclusions">
+                    <h3>Package Includes:</h3>
+                    <ul>
+                        <li>Air Mauritius Ticket</li>
+                        <li>4 Nights Luxury Resort</li>
+                        <li>Private Pool Villa</li>
+                        <li>Daily Breakfast</li>
+                        <li>Cultural Tours</li>
+                        <li>Airport Transfers</li>
+                    </ul>
+                </div>
+                <button class="book-now" onclick="window.location.href='packagesBook.html';">Book Now</button>
+            </div>
+        </div>
+
+     
+        <div class="package-card">
+            <div class="package-header">
+                <img src="images/disneyparis.jpg" alt="Paris" class="package-image">
+                <div class="price-tag">MUR 45,000</div>
+                <div class="package-title">
+                    <h2>Magical Paris</h2>
+                </div>
+            </div>
+            <div class="package-content">
+                <p class="package-description">Experience the magic of Disneyland and the romance of Paris.</p>
+                <div class="inclusions">
+                    <h3>Package Includes:</h3>
+                    <ul>
+                        <li>Disney Hotel Stay</li>
+                        <li>2-Park Access</li>
+                        <li>City Hotel Stay</li>
+                        <li>Seine River Cruise</li>
+                        <li>Eiffel Tower Entry</li>
+                        <li>Airport Transfers</li>
+                    </ul>
+                </div>
+                <button class="book-now" onclick="window.location.href='packagesBook.html';">Book Now</button>
+            </div>
+        </div>
+        <div class="package-card">
+            <div class="package-header">
+                <img src="images/Taj Mahal.jpg" alt="India" class="package-image">
+                <div class="price-tag">MUR 65,000</div>
+                <div class="package-title">
+                    <h2>Magical Paris</h2>
+                </div>
+            </div>
+            <div class="package-content">
+                <p class="package-description">Experience the vibrant culture, historical landmarks, and culinary delights of India. A journey that awakens your senses and soul.</p>
+                <div class="inclusions">
+                    <h3>Package Includes:</h3>
+                    <ul>
+                        <li>Return Air Ticket with Air India</li>
+                        <li>3N Jaipur (4* Hotel)</li>
+                        <li>3N Agra (4* Hotel)</li>
+                        <li>Daily Breakfast</li>
+                        <li>Private Sightseeing with Guide</li>
+                        <li>Transfers: Jaipur Airport to Hotel</li>
+                        <li>Visit to Taj Mahal and Amber Fort</li>
+                        <li>Evening Cultural Show with Dinner</li>
+                    </ul>
+                </div>
+                <button class="book-now" onclick="window.location.href='packagesBook.html';">Book Now</button>
+            </div>
+        </div>
+
+        <div class="package-card">
+            <div class="package-header">
+                <img src="images/Rodrigues Island .jpg" alt="Rodrigues" class="package-image">
+                <div class="price-tag">MUR 35,000</div>
+                <div class="package-title">
+                    <h2>Relax in Rodrigues</h2>
+                </div>
+            </div>
+            <div class="package-content">
+                <p class="package-description">Escape to a tranquil paradise. Discover the unspoiled beauty, friendly locals, and serene beaches of Rodrigues Island.</p>
+                <div class="inclusions">
+                    <h3>Package Includes:</h3>
+                    <ul>
+                        <li>Return Air Ticket with Air Mauritius</li>
+                        <li>4N Accommodation at Cotton Bay Resort</li>
+                        <li>Daily Breakfast and Dinner</li>
+                        <li>Airport to Hotel Transfers</li>
+                        <li>Full-Day Island Tour</li>
+                        <li>Lagoon Snorkeling Experience</li>
+                        <li>Visit to François Leguat Tortoise Reserve</li>
+
+                    </ul>
+                </div>
+                <button class="book-now" onclick="window.location.href='packagesBook.html';">Book Now</button>
+            </div>
+        </div>
+
+        <div class="package-card">
+            <div class="package-header">
+                <img src="images/norway.jpg" alt="Snowy Norway" class="package-image">
+                <div class="price-tag">MUR 110,000</div>
+                <div class="package-title">
+                    <h2>Winter Wonderland in Norway</h2>
+                </div>
+            </div>
+            <div class="package-content">
+                <p class="package-description">Embrace the magical snow-covered landscapes, northern lights, and thrilling winter activities in Norway.</p>
+                <div class="inclusions">
+                    <h3>Package Includes:</h3>
+                    <ul>
+                        li>Air Norway Ticket</li>
+                            <li>2N Radisson Blu Oslo 4*</li>
+                            <li>4N Alta Winter Resort 4*</li>
+                            <li>1N Tromsø Arctic Hotel 4*</li>
+                            <li>Daily Breakfast</li>
+                            <li>All Airport & Inter Hotel Transfer</li>
+                            <li>Full Day Northern Lights Tour</li>
+                            <li>Full Day Snowmobile Safari & Ice Hotel Visit</li>
+                            <li>Ski Pass for 3 Days</li>
+                            <li>Winter Clothing Package</li>
+                            <li>Norway Visa</li>
+                    </ul>
+                </div>
+                <button class="book-now" onclick="window.location.href='packagesBook.html';">Book Now</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <a href="index.html" class="back-to-home">Back to Homepage</a>
+        <p>&copy; 2024 Voyage Vista Travel Agency</p>
+    </footer>
+</body>
+</html>

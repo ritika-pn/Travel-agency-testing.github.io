@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Information</title>
+    <style>
+        
+        body {
+            font-family: 'Courier New', Courier, monospace, sans-serif;
+            background-color: #01304e;
+            color: #333;
+            margin: 0;
+            padding: 0; 
+        }
+
+        .hero-section {
+            background: linear-gradient(45deg, #cfcfcf, #012974, #cfcfcf); /* Gradient background */
+            color: white; 
+            padding: 60px 20px; /* Padding inside the hero section */
+            text-align: center; 
+            margin-bottom: 30px; 
+        }
+
+        .hero-section h1 {
+            font-size: 2.5em;  /* Font size of the main heading */
+            margin: 0;
+            color: white;
+        }
+
+        .hero-section p {
+            font-size: 1.2em;
+            margin-top: 15px;
+            opacity: 0.9; /* Slight transparency */
+        }
+
+        /* Container holding (Contact cards and form) */
+        .container {
+            max-width: 1200px; 
+            margin: -50px auto 50px auto; /* Centers the container and gives a negative margin on top */
+            background: #ffffff; 
+            padding: 30px; /* Padding inside the container */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Shadow effect */
+            position: relative; /* For layering purposes */
+            z-index: 1; /* Layers content above other elements */
+        }
+
+        /* Content wrapper to arrange contact cards and form in a grid */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr; /* Creates two columns */
+            gap: 60px; /* Increased gap between sections */
+            align-items: start;
+        }
+
+        /* Contact Cards Section */
+        .contact-cards-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Reduced gap between cards */
+        }
+
+        /* Individual Contact Card styles */
+        .contact-card {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px; /* Reduced padding */
+            border: 1px solid #ddd;
+            border-radius: 8px; /* Slightly reduced border radius */
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduced shadow */
+            transition: transform 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: scale(1.02);
+        }
+
+        .contact-card img {
+            width: 75px; 
+            height: 75px;
+            border-radius: 50%;
+            margin-bottom: 10px; 
+            object-fit: cover;
+            border: 2px solid #01304e; 
+        }
+
+        .contact-card h3 {
+            margin: 0;
+            color: #333;
+            font-size: 16px; /* Reduced font size */
+        }
+
+        .contact-card p {
+            margin: 3px 0; /* Reduced margin */
+            color: #666;
+            font-size: 13px; /* Reduced font size */
+        }
+
+        .contact-card a {
+            color: #01304e;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;/* Underlines the link on hover */
+        }
+
+        /* Form Section */
+        .form-section {
+            padding: 25px;
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            border: 1px solid #ddd; /* Border around the form */
+        }
+
+        .form-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block; /* Ensures the label is displayed as a block element */
+            margin-bottom: 5px; /* Space between label and input */
+            color: #555;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .form-group input,.form-group textarea,.form-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.3s ease; /* Smooth transition for focus effect */
+        }
+
+        .form-group input:focus,.form-group textarea:focus,.form-group select:focus {
+            border-color: #6b5bff;
+            outline: none;
+        }
+
+         /* Highlight required fields */
+        .required-field {
+            color: #ff6b6b;
+        }
+
+        /* Submit button style */
+        .submit-button {
+            width: 100%;
+            background-color: #01304e;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer; /* Shows pointer cursor on hover */
+            font-size: 16px;
+            transition: background-color 0.3s ease; /* Smooth background color change on hover */
+        }
+
+        .submit-button:hover {
+            background-color: #024571;
+        }
+
+       
+        .back-to-home {
+           display: block;
+           margin: 30px auto;
+           text-align: center;
+           padding: 10px 20px;
+           background-color: #000000;
+           color: white;
+           text-decoration: none;
+           border-radius: 4px;
+        }
+
+        .back-to-home:hover {
+           background-color: #1f1e1e;
+        }
+        footer {
+            text-align: center;
+            font-size: 14px;
+            color: #ffffff;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        footer p {
+            margin: 10px 0;
+        }
+
+         /* Media query for smaller screens */
+         @media (max-width: 992px) {
+            .container {
+                margin: 20px; /* Reduced margin on smaller screens */
+                padding: 20px; /* Reduced padding */
+            }
+
+            .content-wrapper {
+                grid-template-columns: 1fr; /* Makes the layout single-column */
+                gap: 40px; /* Smaller gap */
+            }
+
+            .contact-cards-section {
+                order: 2; /* Moves the contact cards below the form */
+            }
+
+            .form-section {
+                order: 1; /* Keeps the form at the top */
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="hero-section">
+        <h1>Contact Information</h1>
+        <p>Let's Start a Conversation</p>
+    </div>
+
+    <div class="container">
+        <div class="content-wrapper">
+             <!-- Contact cards section -->
+            <div class="contact-cards-section">
+                  <!-- Individual contact card -->
+                <div class="contact-card">
+                    <img src="images/me.jpg" alt="Owner Photo">
+                    <h3>Krishnee Poorun</h3>
+                    <p><strong>Role:</strong> Owner & Founder</p>
+                    <p><strong>Email:</strong> <a href="mailto:krishneepoorun@gmail.com">krishneepoorun@gmail.com</a></p>
+                    <p><strong>Phone:</strong> +1-234-567-890</p>
+                </div>
+
+                <div class="contact-card">
+                    <img src="images/mingyu.jpg" alt="Worker 1 Photo">
+                    <h3>Kim Mingyu</h3>
+                    <p><strong>Role:</strong> Travel Consultant</p>
+                    <p><strong>Email:</strong> <a href="mailto:KimMingyu@gmail.com">KimMingyu@gmail.com</a></p>
+                    <p><strong>Phone:</strong> +1-987-654-321</p>
+                </div>
+
+                <div class="contact-card">
+                    <img src="images/stiles.jpg" alt="Worker 2 Photo">
+                    <h3>Stiles Stilinski</h3>
+                    <p><strong>Role:</strong> Customer Support</p>
+                    <p><strong>Email:</strong> <a href="mailto:StilesStilinski@gmail.com">StilesStilinski@gmail.com</a></p>
+                    <p><strong>Phone:</strong> +1-555-123-456</p>
+                </div>
+            </div>
+
+             <!-- Contact form section -->
+            <div class="form-section">
+                <h2>Send Us a Message</h2>
+                <form action="/submit" method="POST">
+                    <div class="form-group">
+                        <label for="firstName">First Name <span class="required-field">*</span></label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">Last Name <span class="required-field">*</span></label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email <span class="required-field">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject <span class="required-field">*</span></label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Please select a subject</option>
+                            <option value="booking">Travel Booking</option>
+                            <option value="inquiry">General Inquiry</option>
+                            <option value="support">Customer Support</option>
+                            <option value="feedback">Feedback</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message <span class="required-field">*</span></label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-button">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <a href="index.html" class="back-to-home">Back to Homepage</a>
+        <p>&copy; 2024 Voyage Vista Travel Agency</p>
+    </footer>
+</body>
+</html>          
